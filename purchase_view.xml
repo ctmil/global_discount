@@ -7,8 +7,8 @@
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.purchase_order_form"/>
             <field name="arch" type="xml">
-		<field name="company_id" position="after" states="draft">
-			<field name="discount" />
+		<field name="company_id" position="after" >
+			<field name="discount" states="draft" />
 		</field>
             </field>
         </record>
