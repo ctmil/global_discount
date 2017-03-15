@@ -28,7 +28,7 @@ class purchase_order(models.Model):
 	#		for line in self.order_line:
 	#
 
-	@api.depends('order_line.price_total')
+	@api.depends('order_line.price_total','discount')
 	def _amount_all(self):
 		for order in self:
 			amount_untaxed = amount_tax = 0.0
@@ -41,6 +41,7 @@ class purchase_order(models.Model):
 		                else:
                 		    amount_tax += line.price_tax
 			if order.discount > 0 and order.discount < 100:
+				order_discount = 1 - (order.discount / 100)
 				comp_order_discount = 1 - order_discount
 			else:
 				order_discount = 1
