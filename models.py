@@ -46,12 +46,21 @@ class purchase_order(models.Model):
 			else:
 				order_discount = 1
 			comp_order_discount = 1 - order_discount
-			order.update({
-                		'amount_untaxed': order.currency_id.round(amount_untaxed * order_discount),
-		                'amount_tax': order.currency_id.round(amount_tax * order_discount),
-                		'amount_total': amount_untaxed * order_discount + amount_tax * order_discount,
-				'amount_discount': (amount_untaxed * comp_order_discount + amount_tax * comp_order_discount) * (-1),
-		        })
+			if order_discount == 1:
+				order.update({
+        	        		'amount_untaxed': order.currency_id.round(amount_untaxed * order_discount),
+			                'amount_tax': order.currency_id.round(amount_tax * order_discount),
+                			'amount_total': amount_untaxed * order_discount + amount_tax * order_discount,
+					'amount_discount': (amount_untaxed * comp_order_discount + amount_tax * comp_order_discount),
+			        })
+			else:
+				tax_rate = amount_tax / amount_untaxed
+				order.update({
+        	        		'amount_untaxed': order.currency_id.round(amount_untaxed * order_discount),
+			                'amount_tax': order.currency_id.round(amount_untaxed * order_discount * tax_rate),
+                			'amount_total': amount_untaxed * order_discount + amount_untaxed * order_discount * tax_rate,
+					'amount_discount': (amount_untaxed * comp_order_discount + amount_tax * comp_order_discount),
+			        })
 
 	@api.one
 	@api.constrains('discount')
