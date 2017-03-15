@@ -10,7 +10,7 @@
 		<field name="company_id" position="after" >
 			<field name="discount" states="draft" />
 		</field>
-		<field name="amount_tax" position="before">
+		<field name="amount_tax" position="after">
                         <div class="oe_subtotal_footer_separator oe_inline">
                                 <label for="amount_discount"/>
                         </div>

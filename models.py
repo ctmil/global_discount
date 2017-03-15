@@ -60,5 +60,5 @@ class purchase_order(models.Model):
 			raise ValidationError("Descuento debe ser mayor a 0 y menor a 100")
 
 	discount = fields.Float('Descuento')
-	amount_discount = fields.Float('Monto Descuento')
+	amount_discount = fields.Monetary('Monto Descuento', store=True, readonly=True, compute='_amount_all')
 
