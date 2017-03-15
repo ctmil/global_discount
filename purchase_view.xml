@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="purchase.purchase_order_form"/>
             <field name="arch" type="xml">
 		<field name="company_id" position="after" >
-			<field name="discount" states="draft" />
+			<field name="discount" states="draft,sent" />
 		</field>
 		<field name="amount_total" position="after">
                         <div class="oe_subtotal_footer_separator oe_inline">
