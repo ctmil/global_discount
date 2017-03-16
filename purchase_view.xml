@@ -12,15 +12,17 @@
 		</field>
 		<field name="amount_untaxed" position="before">
                                <field name="amount_pre_discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                               <field name="amount_discount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
 		</field>
-		<field name="amount_total" position="after">
+			<field name="amount_discount" states="draft,sent" />
+		<!-- field name="amount_total" position="after">
                         <div class="oe_subtotal_footer_separator oe_inline">
                                 <label for="amount_discount"/>
                         </div>
                         <field name="amount_discount" nolabel="1" class="oe_subtotal_footer_separator" 
 				readonly="1"
 				widget="monetary" options="{'currency_field': 'currency_id'}"/>
-		</field>
+		</field -->
             </field>
         </record>
 
