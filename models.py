@@ -51,8 +51,8 @@ class purchase_order(models.Model):
         	        		'amount_untaxed': order.currency_id.round(amount_untaxed * order_discount),
 			                'amount_tax': order.currency_id.round(amount_tax * order_discount),
                 			'amount_total': amount_untaxed * order_discount + amount_tax * order_discount,
-					'amount_discount': (amount_untaxed * comp_order_discount + amount_tax * comp_order_discount) * (-1),
-					'amount_pre_discount': (amount_untaxed * comp_order_discount + amount_tax * comp_order_discount),
+					'amount_discount': (amount_untaxed * comp_order_discount) * (-1),
+					'amount_pre_discount': (amount_untaxed),
 			        })
 			else:
 				tax_rate = amount_tax / amount_untaxed
@@ -60,8 +60,8 @@ class purchase_order(models.Model):
         	        		'amount_untaxed': order.currency_id.round(amount_untaxed * order_discount),
 			                'amount_tax': order.currency_id.round(amount_untaxed * order_discount * tax_rate),
                 			'amount_total': amount_untaxed * order_discount + amount_untaxed * order_discount * tax_rate,
-					'amount_discount': (amount_untaxed * comp_order_discount + amount_tax * comp_order_discount) * (-1),
-					'amount_pre_discount': (amount_untaxed + amount_tax),
+					'amount_discount': (amount_untaxed * comp_order_discount) * (-1),
+					'amount_pre_discount': (amount_untaxed),
 			        })
 
 	@api.one
